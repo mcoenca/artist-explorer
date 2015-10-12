@@ -8,7 +8,15 @@ body {
 }
 
 h4 {
-  color: #81b900;
+  color: #FFA000;
+}
+
+.container {
+  background-color: #3F51B5;
+}
+
+.navbar-title {
+  border-left: 2px solid #FFA000;
 }
 
 /* dndTree */
