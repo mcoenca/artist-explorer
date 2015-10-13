@@ -64,7 +64,7 @@ var dndTree = (function() {
         var y = -source.x0;
 
 
-        x = x * scale - viewerWidth / 4;
+        x = x * scale + viewerWidth / 4;
         y = y * scale + viewerHeight / 2.7;
         debugger;
 
@@ -216,9 +216,14 @@ var dndTree = (function() {
         }
         return d;
     }
+    function loadIframe(d) {
+        AE.showIframe(d.artist);
+    }
 
     //event on clicking a node
     function click(d) {
+        loadIframe(d);
+        debugger;
         d = toggleChildren(d);
         highlightPathAndNode(d);
     }

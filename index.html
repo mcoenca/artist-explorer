@@ -165,6 +165,23 @@
         </div>
       </div>
 
+      <!-- Iframe Modal -->
+      <div class="modal fade" id="iframeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div id="iframe-container" data-bind="html: iframeHTML">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+                <img style="max-width=200px;" data-bind="attr:{src: authorAvatar}">
+                <button id="closeIframe" type="button" class="btn btn-sm" data-dismiss="modal">See Bridge by <span data-bind="text: bridgeAuthor"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

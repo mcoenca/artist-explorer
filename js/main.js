@@ -1,4 +1,4 @@
-/* global SpotifyWebApi, dndTree, $, geoplugin_countryCode, Promise, google, setRepeatArtists */
+/* global SpotifyWebApi, dndTree, $, geoplugin_countryCode, Promise, google, setRepeatArtists, document, ko */
 (function () {
     'use strict';
 
@@ -179,7 +179,6 @@
         artistInfoModel.isArtistInfoVisible(true);
         artistInfoModel.artistName(artist.name);
         artistInfoModel.spotifyLink(artist.external_urls.spotify);
-
         drawChart(artist.popularity);
 
         $.ajax({
@@ -491,6 +490,10 @@
                     return false;
                 }
             });
+
+        $('#closeIframe').on('click', function() {
+            iframeModel.iframeHTML('');
+        });
     });
 
     //Post function to save the tree on the server
@@ -528,12 +531,26 @@
         var self = this;
         self.link = ko.observable();
     }
-    var shareModel = new shareModel()
-    ko.applyBindings(shareModel, document.getElementById('myModal'));
+    var shareModel = new shareModel();
+    ko.applyBindings(shareModel, document.getElementById("myModal"));
 
+    function showIframe(artist) {
+        iframeModel.iframeHTML(artist.iframeHTML);
+        iframeModel.authorAvatar(artist.authorAvatar);
+        iframeModel.bridgeAuthor(artist.bridgeAuthor);
+        $("#iframeModal").modal("show");
+    }
+    var IframeModel = function() {
+        var self = this;
+        self.iframeHTML = ko.observable();
+        self.authorAvatar = ko.observable();
+        self.bridgeAuthor = ko.observable();
+    };
+    var iframeModel = new IframeModel();
+    ko.applyBindings(iframeModel, document.getElementById("iframeModal"));
     //todo:make it work
     function copyLink() {
-        text = $('#shareLink').text();
+        text = $("#shareLink").text();
     }
 
     //Login UI Model for KO, accessToken and localStorage for ae_userid, ae_display_name ae_user_image etc...
@@ -715,6 +732,7 @@
         artistInfoModel: artistInfoModel,
         saveTree: saveTree,
         share: share,
+        showIframe: showIframe,
         copyLink: copyLink,
         fbShare: fbShare,
         login: login,
