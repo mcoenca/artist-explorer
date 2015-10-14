@@ -66,7 +66,7 @@ var dndTree = (function() {
 
         x = x * scale + viewerWidth / 4;
         y = y * scale + viewerHeight / 2.7;
-        debugger;
+        // debugger;
 
         //to center it:
         //var x = -source.y0;
