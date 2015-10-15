@@ -50,14 +50,39 @@
           </a> -->
 
         </div>
-        <div class="author-info">
-          <div class="author-img-container">
-            <img class="author-img" src="http://cdn.overbridges.com/aws/unsafe/210x260/smart/novecento/head.jpg">
-          </div>
-        </div>
+
 
         <!-- Artist Info -->
         <div data-bind="visible: isArtistInfoVisible" id="infobox">
+
+          <div class="author-info">
+            <div class="author-img-container">
+              <img class="author-img" src="http://cdn.overbridges.com/aws/unsafe/210x260/smart/novecento/head.jpg">
+            </div>
+            <div class="author-text-block">
+              <div class="author-name-container">
+                <div class="author-name"> Novecento </div>
+              </div>
+              <div class="author-desc-container">
+                <div class="author-desc"> Michelangelo took a big block of marble. He carved a lot of things out. I'm what's left.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="his-bridge-container">
+            <div class="his-bridge"> 
+              <span> His bridge: </span>
+              <span>
+                <img src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px; display:inline-block">
+              </span>
+              <span>27</span>
+              <span>
+                <img src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px; display:inline-block">
+              </span>
+              <span>5</span>
+            </div>
+          </div>
+
           <div class="content-snippet start">
             <a target="_blank" class="content-title" href="https://www.youtube.com/watch?v=Bh3m3_Mlcik"> Underground Resistance </a>
             <div class="content-img-container">
@@ -82,7 +107,27 @@
             </div>
           </div>
 
-          <div id="chart_div" style="width: 350px; height: 120px; display: none"></div>
+          <hr>
+
+          <div class="social-block">
+            <div class="honor">
+              <img class="social-icon" src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px">
+              <span class="honor-test">Honor</span>
+            </div>
+            <div class="like">
+              <img class="social-icon" src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px">
+              <span class="social-text">Like</span>
+            </div>
+            <div class="comment">
+              <img class="social-icon" src="http://uxrepo.com/static/icon-sets/typicons/svg/comment.svg" style="height:20px">
+              <span class="social-text">Comment</span>
+            </div>
+          </div>
+
+
+
+
+<!--           <div id="chart_div" style="width: 350px; height: 120px; display: none"></div> -->
 
 
 
@@ -96,9 +141,9 @@
 
 <!--           <div data-bind="visible: topTracks().length <= 0" id="divPopularTracks" class="alert">
             Oops, seems like there are no available tracks in your country
-          </div> -->
+          </div> 
 
-          <hr>
+          <hr> -->
 
           <div data-bind="visible: genres().length > 0">
             <h4 id ="main-genres-label">Genres</h4>
