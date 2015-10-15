@@ -288,6 +288,8 @@ div #see-the-code {
   }
 }
 
+
+
 /*------------ Author info --------------*/
 
 #infobox .author-info {
@@ -329,18 +331,41 @@ div #see-the-code {
   font-style: italic;
 }
 
-/*------------ Author info --------------*/
+/*------------ Bridge card --------------*/
+
+#infobox .bridge-card {
+  margin: 1rem 0;
+  box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+  background-color: white;
+}
+
+
+
+/*------------ His Bridge --------------*/
 
 #infobox .his-bridge-container {
-  padding: 2rem 1rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem 0;
   font-size: 2rem;
   color: #1A237E;
+  background-color: white;
+  border-bottom:1px solid #E8EAF6;
+  position: relative;
+}
 
+#infobox .his-bridge-container .bridge-rewards {
+  position: absolute;
+  right:0;
 }
 
 
 
 /*------------ Bridge ---------------*/
+
+#infobox .bridge-container {
+  padding: 0.5rem;
+  border-bottom:1px solid #E8EAF6;
+}
 
 
   /*---- Start and Destination snippets*/
@@ -428,56 +453,10 @@ div #see-the-code {
     border-radius: 20px;
   }
 
-  #infobox .inside-popup-content .head-band {
-    display: none;
-/*    background-color:#E8EAF6 ;
-    color:#3F51B5;
-    width:100%;
-    padding:0.25rem 0.5rem;
-    font-weight: 200;
-    border-radius: 0 20px 0 0;
-    height: 50px;
-    position: relative;*/
-  }
-  #infobox .inside-popup-content .popup-image-container {
-    height: 50px;
-    width:50px;
-    overflow: hidden;
-    position: absolute;
-    margin-top: -0.25rem;
-    margin-left: -0.5rem;
-  }
-  #infobox .inside-popup-content .popup-image-container img{
-    width:50px;
-    min-height:50px;
-  }
-
-  #infobox .inside-popup-content .popup-name {
-    padding-left: 50px;
-    color:#3F51B5;
-    font-weight: 400;
-  }
-
-  #infobox .inside-popup-content .popup-icon {
-    color:#FFA000;
-    float: right;
-  }
-
   #infobox .inside-popup-content .popup-description {
     padding:0.25rem 0.5rem;
     font-weight: 400;
   }
-
-  #infobox .inside-popup-content .social-icons {
-    display: none;
-/*    background-color:#E8EAF6 ;
-    height:50px;
-    color:#3F51B5;
-    padding:0.25rem 0.5rem;
-    font-weight: 300;
-    border-radius: 0 0 0 20px;*/
-  }
-
 
 
 
@@ -493,11 +472,11 @@ div #see-the-code {
   padding: 0.1rem 0.5rem;
 }
 
-#config #range-container, #config #repeat-artists-container {
+#config .config-element {
   display: none;
 }
 
-#config:hover #range-container, #config:hover #repeat-artists-container {
+#config:hover .config-element {
   display: block;
 }
 

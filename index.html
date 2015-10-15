@@ -34,100 +34,88 @@
 
         </div>
 
-        <div class="author-info">
-          <div class="author-img-container">
-            <img class="author-img" data-bind="attr:{src:bridgeAuthorAvatar}">
-          </div>
-        </div>
-
         <!-- Artist Info -->
         <div data-bind="visible: isArtistInfoVisible" id="infobox">
-
+          <!-- Author Card --> 
           <div class="author-info">
             <div class="author-img-container">
-              <img class="author-img" src="http://cdn.overbridges.com/aws/unsafe/210x260/smart/novecento/head.jpg">
+              <img class="author-img" data-bind="attr:{src:bridgeAuthorAvatar}">
             </div>
             <div class="author-text-block">
               <div class="author-name-container">
-                <div class="author-name"> Novecento </div>
+                <div class="author-name" data-bind="text: bridgeAuthor().username"></div>
               </div>
               <div class="author-desc-container">
                 <div class="author-desc"> Michelangelo took a big block of marble. He carved a lot of things out. I'm what's left.</div>
+
               </div>
             </div>
           </div>
-
-          <div class="his-bridge-container">
-            <div class="his-bridge"> 
-              <span> His bridge: </span>
-              <span>
-                <img src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px; display:inline-block">
-              </span>
-              <span>27</span>
-              <span>
-                <img src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px; display:inline-block">
-              </span>
-              <span>5</span>
+          <!-- Bridge Card --> 
+          <div class="bridge-card">
+            <div class="his-bridge-container">
+              <div class="his-bridge"> 
+                <span> His bridge: </span>
+                <div class="bridge-rewards">
+                  <span>
+                    <img src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px; display:inline-block">
+                  </span>
+                  <span data-bind="text:bridge().diamants"></span>
+                  <span>
+                    <img src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px; display:inline-block">
+                  </span>
+                  <span data-bind="text:bridge().pouces"></span>
+                </div>
+              </div>
             </div>
-          </div>
+            <div class="bridge-container">
+              <div class="content-snippet start">
+                <a target="_blank" data-bind="text: previousContent().title, attr: { href:previousContent().url }" class="content-title" ></a>
+                <div class="content-img-container">
+                  <img class="content-img" data-bind="attr: { src:previousContentImageUrl }">
+                </div>
+                <div class="bridge-line">
+                </div>
+              </div>
 
-          <div class="content-snippet start">
-            <a target="_blank" data-bind="text: previousContent().title, attr: { href:previousContent().url }" class="content-title" ></a>
-            <div class="content-img-container">
-              <img class="content-img" data-bind="attr: { src:previousContentImageUrl }">
-            </div>
-            <div class="bridge-line">
-            </div>
-          </div>
+              <div data-bind="visible: bridgeExists" id="bigoraphyDiv">
+    <!--             <h4 id ="biography-label">Bridge</h4> -->
 
-          <div data-bind="visible: bridgeExists" id="bigoraphyDiv">
-<!--             <h4 id ="biography-label">Bridge</h4> -->
+    <!--             <div data-bind="html: biography" id="biography">
 
-<!--             <div data-bind="html: biography" id="biography">
-
-            </div> -->
-            <div id="biographyy">
-              <div class="inside-popup-content" style="background-color:white; font-weight:500;">
-                <div class="head-band">
-                  <div class="popup-image-container">
-                    <img data-bind="attr:{src:bridgeAuthorAvatar}">
+                </div> -->
+                <div id="biography">
+                  <div class="inside-popup-content" style="background-color:white; font-weight:500;">
+                    <div class="popup-description" data-bind="text: bridge().description">
+                    </div>
                   </div>
-                  <span class="popup-name" data-bind="text: bridgeAuthor().username"></span> says: <span class="popup-icon"><i class=icon-bridge></i></span>
                 </div>
-                <div class="popup-description" data-bind="text: bridge().description">
+
+              </div>
+
+              <div class="content-snippet end">
+                <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" class="content-title" id="artistName"> </a>
+                <div class="content-img-container">
+                  <img class="content-img" data-bind="attr: { src:image }">
                 </div>
-                <div class="social-icons">
-                  <span><i class="icon-diamond"></i></span>
-                  <span data-bind="text:bridge().diamants">&nbsp;</span>
-                  <span>&nbsp;&nbsp;<i class="icon-heart"></i></span>
-                  <span data-bind="text:bridge().pouces">&nbsp;</span></div></div>
+                <div class="bridge-line">
+                </div>
+              </div>
             </div>
 
-          </div>
-
-          <div class="content-snippet end">
-            <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" class="content-title" id="artistName"> </a>
-            <div class="content-img-container">
-              <img class="content-img" data-bind="attr: { src:image }">
-            </div>
-            <div class="bridge-line">
-            </div>
-          </div>
-
-          <hr>
-
-          <div class="social-block">
-            <div class="honor">
-              <img class="social-icon" src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px">
-              <span class="honor-test">Honor</span>
-            </div>
-            <div class="like">
-              <img class="social-icon" src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px">
-              <span class="social-text">Like</span>
-            </div>
-            <div class="comment">
-              <img class="social-icon" src="http://uxrepo.com/static/icon-sets/typicons/svg/comment.svg" style="height:20px">
-              <span class="social-text">Comment</span>
+            <div class="social-block">
+              <div class="honor">
+                <img class="social-icon" src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px">
+                <span class="honor-test">Honor</span>
+              </div>
+              <div class="like">
+                <img class="social-icon" src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px">
+                <span class="social-text">Like</span>
+              </div>
+              <div class="comment">
+                <img class="social-icon" src="http://uxrepo.com/static/icon-sets/typicons/svg/comment.svg" style="height:20px">
+                <span class="social-text">Comment</span>
+              </div>
             </div>
           </div>
 
@@ -173,7 +161,7 @@
           </div>
           -->
 
-          <div id="range-container">
+          <div id="range-container" class="config-element">
             <div class="range-desc">Max # of bridges to expand:</div>
             <div class="range-bar">
               <input type="range" class="slider" min="1" max="20" step="1" oninput="AE.changeNumberOfArtists(this.value)"/>
@@ -181,14 +169,14 @@
             </div>
           </div>
         
-          <div id="repeat-artists-container">
+          <div id="repeat-artists-container" class="config-element">
             Expand already explored pages:
             <div id="checkbox-div">
               <input type="checkbox" id="repeatArtists" onclick="AE.setRepeatArtists()">
             </div>
           </div>
 
-          <div id="is-zoomable-container">
+          <div id="is-zoomable-container" class="config-element">
             Make the scene zoomable
             <div id="checkbox-div">
               <input type="checkbox" id="isZoomable">
