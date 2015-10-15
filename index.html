@@ -26,36 +26,10 @@
      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
      ga('create', 'UA-56769808-1', 'auto');
-     ga('send', 'pageview');
-    </script>
+     ga('send', 'pageview'); </script>
+
     <div class="main-container">
       <div id="rightpane">
-        <div id="config">
-          <h4> Preferences </h4>
-          <!--
-          <div id="volume-container">
-            <div class="range-desc">Volume:</div>
-            <div class="range-bar">
-              <input type="range" class="slider" min="0" max="1" step="0.05" oninput="Player.setVolume(this.value)"/>
-            </div>
-          </div>
-          -->
-
-          <div id="range-container">
-            <div class="range-desc">Max # of bridges to expand:</div>
-            <div class="range-bar">
-              <input type="range" class="slider" min="1" max="20" step="1" oninput="AE.changeNumberOfArtists(this.value)"/>
-              <div id="range-indicator">10</div>
-            </div>
-          </div>
-        </div>
-        <div id="repeat-artists-container">
-          Expand already explored pages:
-          <div id="checkbox-div">
-            <input type="checkbox" id="repeatArtists" onclick="AE.setRepeatArtists()">
-          </div>
-        </div>
-        <hr>
         <div data-bind="visible: !isArtistInfoVisible()" id="hoverwarning">
           <h4>Help</h4>
           <ul>
@@ -76,18 +50,41 @@
           </a> -->
 
         </div>
+        <div class="author-info">
+          <div class="author-img-container">
+            <img class="author-img" src="http://cdn.overbridges.com/aws/unsafe/210x260/smart/novecento/head.jpg">
+          </div>
+        </div>
 
         <!-- Artist Info -->
         <div data-bind="visible: isArtistInfoVisible" id="infobox">
-          <h4>Content Info </h4>
-          <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" id="artistName"> </a>
-          <p </p>
-          <div id="chart_div" style="width: 350px; height: 120px; display: none"></div>
+          <div class="content-snippet start">
+            <a target="_blank" class="content-title" href="https://www.youtube.com/watch?v=Bh3m3_Mlcik"> Underground Resistance </a>
+            <div class="content-img-container">
+              <img class="content-img"src="http://davealex.com/wp-content/uploads/2012/05/UR-Punisher.jpg">
+            </div>
+            <div class="bridge-line">
+            </div>
+          </div>
 
           <div data-bind="visible: bioExists" id="bigoraphyDiv">
-            <h4 id ="biography-label">Bridge</h4>
-            <p data-bind="html: biography" id="biography"> </p>
+<!--             <h4 id ="biography-label">Bridge</h4> -->
+            <div data-bind="html: biography" id="biography"> 
+            </div>
           </div>
+
+          <div class="content-snippet end">
+            <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" class="content-title" id="artistName"> </a>
+            <div class="content-img-container">
+              <img class="content-img"src="https://files.list.co.uk/images/2013/01/15/jeff-mills-web-image-2.jpg">
+            </div>
+            <div class="bridge-line">
+            </div>
+          </div>
+
+          <div id="chart_div" style="width: 350px; height: 120px; display: none"></div>
+
+
 
 <!--           <h4>Popular Tracks</h4>
 
@@ -112,6 +109,34 @@
             </ul>
           </div>
         </div>
+
+        <div id="config">
+          <h5>Preferences</h5>
+          <!--
+          <div id="volume-container">
+            <div class="range-desc">Volume:</div>
+            <div class="range-bar">
+              <input type="range" class="slider" min="0" max="1" step="0.05" oninput="Player.setVolume(this.value)"/>
+            </div>
+          </div>
+          -->
+
+          <div id="range-container">
+            <div class="range-desc">Max # of bridges to expand:</div>
+            <div class="range-bar">
+              <input type="range" class="slider" min="1" max="20" step="1" oninput="AE.changeNumberOfArtists(this.value)"/>
+              <div id="range-indicator">10</div>
+            </div>
+          </div>
+        
+          <div id="repeat-artists-container">
+            Expand already explored pages:
+            <div id="checkbox-div">
+              <input type="checkbox" id="repeatArtists" onclick="AE.setRepeatArtists()">
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class ="left">
@@ -181,14 +206,16 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
+<!--               <img style="max-width=200px;" data-bind="attr:{src: authorAvatar}"> -->
+              <button id="closeIframe" type="button" class="btn btn-sm" data-dismiss="modal">Close X <!-- <span data-bind="text: bridgeAuthor"></span> -->
+              </button>
               <div id="iframe-container" data-bind="html: iframeHTML">
               </div>
             </div>
 
-            <div class="modal-footer">
-                <img style="max-width=200px;" data-bind="attr:{src: authorAvatar}">
-                <button id="closeIframe" type="button" class="btn btn-sm" data-dismiss="modal">See Bridge by <span data-bind="text: bridgeAuthor"></span></button>
-            </div>
+<!--             <div class="modal-footer">
+  
+            </div> -->
           </div>
         </div>
       </div>
@@ -198,6 +225,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
+
               <button type="button" class="close btn-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title" id="myModalLabel">Here is your link:</h3>
               <a id="shareLink" data-bind="text: link, attr: { href:link }"></a>
@@ -207,8 +235,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-facebook btn-sm" onclick="AE.fbShare()">Share</button>
-                <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+
             </div>
           </div>
         </div>

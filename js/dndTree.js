@@ -223,7 +223,7 @@ var dndTree = (function() {
     //event on clicking a node
     function click(d) {
         loadIframe(d);
-        debugger;
+        // debugger;
         d = toggleChildren(d);
         highlightPathAndNode(d);
     }
