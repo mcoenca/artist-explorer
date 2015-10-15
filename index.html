@@ -12,13 +12,16 @@
   </head>
   <body>
     <div class="main-container">
+      <!-- History -->
       <div id="nodes-history">
-          <h4>history</h4>
-          <ul data-bind="foreach: nodesHistory">
-            <li>
-              <p data-bind="text: artist.content.title, click: $parent.goBackToContent"></p>
-            </li>
-          </ul>
+        <div id="nodes-list" data-bind="foreach: nodesHistory">
+          >
+          <div class="node">
+            <img style="height:20px; width:20px" data-bind="attr: { src:image }, click: $parent.goBackToContent">
+          </div>
+        </div>
+<!--         <p data-bind="text: artist.content.title, click: $parent.goBackToContent"></p> -->
+        <div id="orange-line"></div>
       </div>
       <div id="rightpane">
         <div data-bind="visible: !isArtistInfoVisible()" id="hoverwarning">
@@ -44,45 +47,30 @@
 
         <!-- Artist Info -->
         <div data-bind="visible: isArtistInfoVisible" id="infobox">
-          <!-- Author Card --> 
-          <div class="author-info">
-            <div class="author-img-container">
-              <img class="author-img" data-bind="attr:{src:bridgeAuthorAvatar}">
-            </div>
-            <div class="author-text-block">
-              <div class="author-name-container">
-                <div class="author-name" data-bind="text: bridgeAuthor().username"></div>
-              </div>
-              <div class="author-desc-container">
-                <div class="author-desc"> Michelangelo took a big block of marble. He carved a lot of things out. I'm what's left.</div>
-
-              </div>
-            </div>
-          </div>
+          
           <!-- Bridge Card --> 
           <div class="bridge-card">
-            <div class="his-bridge-container">
-              <div class="his-bridge"> 
-                <span> His bridge: </span>
-                <div class="bridge-rewards">
-                  <span>
-                    <img src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px; display:inline-block">
-                  </span>
-                  <span data-bind="text:bridge().diamants"></span>
-                  <span>
-                    <img src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px; display:inline-block">
-                  </span>
-                  <span data-bind="text:bridge().pouces"></span>
-                </div>
-              </div>
-            </div>
             <div class="bridge-container">
               <div class="content-snippet start">
-                <a target="_blank" data-bind="text: previousContent().title, attr: { href:previousContent().url }" class="content-title" ></a>
+                <!-- <a target="_blank" data-bind="text: previousContent().title, attr: { href:previousContent().url }" class="content-title" ></a> -->
                 <div class="content-img-container">
                   <img class="content-img" data-bind="attr: { src:previousContentImageUrl }">
                 </div>
                 <div class="bridge-line">
+                  <div id="bridge-rewards">
+                    <div class="reward-block">
+                      <span>
+                        <img src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png">
+                      </span>
+                      <span data-bind="text:bridge().diamants"></span>
+                    </div>
+                    <div class="reward-block">
+                      <span>
+                        <img src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg">
+                      </span>
+                      <span data-bind="text:bridge().pouces"></span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -102,7 +90,7 @@
               </div>
 
               <div class="content-snippet end">
-                <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" class="content-title" id="artistName"> </a>
+                <!-- <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" class="content-title" id="artistName"> </a> -->
                 <div class="content-img-container">
                   <img class="content-img" data-bind="attr: { src:image }">
                 </div>
@@ -111,21 +99,39 @@
               </div>
             </div>
 
-            <div class="social-block">
-              <div class="honor">
+            <!-- Author Card --> 
+            <div class="author-info">
+              <div class="author-img-container">
+                <img class="author-img" data-bind="attr:{src:bridgeAuthorAvatar}">
+              </div>
+              <div class="author-text-block">
+                <div class="author-name-container">
+                  <div class="author-name" data-bind="text: bridgeAuthor().username"></div>
+                </div>
+                <div class="author-desc-container">
+                  <div class="author-desc"> Michelangelo took a big block of marble. He carved a lot of things out. I'm what's left.</div>
+
+                </div>
+              </div>
+            </div>
+
+            <div id="social-block">
+              <div id="honor" class="social-action">
                 <img class="social-icon" src="http://freeflaticons.net/wp-content/uploads/2014/09/diamond-copy-14107906418n4gk.png" style="height:20px">
                 <span class="honor-test">Honor</span>
               </div>
-              <div class="like">
+              <div id="like" class="social-action">
                 <img class="social-icon" src="http://uxrepo.com/static/icon-sets/linecons/svg/heart.svg" style="height:20px">
                 <span class="social-text">Like</span>
               </div>
-              <div class="comment">
+              <div id="comment" class="social-action">
                 <img class="social-icon" src="http://uxrepo.com/static/icon-sets/typicons/svg/comment.svg" style="height:20px">
                 <span class="social-text">Comment</span>
               </div>
             </div>
           </div>
+
+          
 
 
 

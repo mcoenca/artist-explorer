@@ -129,10 +129,10 @@ h4 {
 #rightpane {
   font-size: 15px !important;
   float: left;
-  top: 0px;
+  top: 60px;
   left:0px;
   width: 35vw;
-  height: 100vh !important;
+  height: calc(100vh - 60px) !important;
   position: relative;
   padding: 5px;
   overflow-y: scroll;
@@ -288,7 +288,44 @@ div #see-the-code {
   }
 }
 
+/*------------ History --------*/
 
+#nodes-history {
+  position: fixed;
+  height: 60px;
+  width:35vw;
+  top:0;
+  left:0;
+  border-bottom: 2px solid #3F51B5;
+  overflow: hidden;
+  overflow-x:scrollbar;
+}
+
+#nodes-history #nodes-list {
+  height:100%;
+  text-align: right;
+}
+
+#nodes-history #nodes-list .node {
+  display: inline-block;
+  width: 30px;
+  height:30px;
+  margin: 5px;
+}
+
+#nodes-history #nodes-list .node img {
+  width:100%;
+  min-height: 100%;
+}
+
+#nodes-history #orange-line {
+  position: fixed;
+  left:0;
+  top: 36px;
+  border-right:2px solid #FFA000;
+  width: calc(35vw - 25px - 1rem + 1px);
+  height:50px;
+}
 
 /*------------ Author info --------------*/
 
@@ -297,7 +334,6 @@ div #see-the-code {
   padding: 0.5rem;
   width:100%;
   background-color: #E8EAF6;
-  box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
 
 }
 
@@ -312,6 +348,7 @@ div #see-the-code {
 
 #infobox .author-info .author-img-container .author-img {
   width:100%;
+  min-height: 100%;
 }
 
 #infobox .author-text-block {
@@ -335,36 +372,13 @@ div #see-the-code {
 
 #infobox .bridge-card {
   margin: 1rem 0;
-  box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
-  background-color: white;
+/*  box-shadow: 0px 1px 10px rgba(0,0,0,0.2);*/
 }
-
-
-
-/*------------ His Bridge --------------*/
-
-#infobox .his-bridge-container {
-  margin: 0 0.5rem;
-  padding: 0.5rem 0;
-  font-size: 2rem;
-  color: #1A237E;
-  background-color: white;
-  border-bottom:1px solid #E8EAF6;
-  position: relative;
-}
-
-#infobox .his-bridge-container .bridge-rewards {
-  position: absolute;
-  right:0;
-}
-
-
 
 /*------------ Bridge ---------------*/
 
 #infobox .bridge-container {
   padding: 0.5rem;
-  border-bottom:1px solid #E8EAF6;
 }
 
 
@@ -406,7 +420,7 @@ div #see-the-code {
 
 
   #infobox .start .content-img-container{
-    left:0;
+    right:0;
   }
 
   #infobox .end .content-img-container{
@@ -419,14 +433,13 @@ div #see-the-code {
   }
 
   #infobox .content-snippet .bridge-line {
-    width:calc(100% - 50px);
-    margin-left: 25px;
+    width:calc(100% - 25px + 1px);
     height:20px;
     position: absolute;
   }
 
   #infobox .content-snippet.start .bridge-line {
-    border-left: 2px solid #ffa000;
+    border-right: 2px solid #ffa000;
     top:50px;
   }
 
@@ -434,6 +447,26 @@ div #see-the-code {
     border-right: 2px solid #ffa000;
   }
 
+  #infobox .content-snippet .bridge-line #bridge-rewards{
+    border-radius: 4px 4px 0 0;
+    border: 2px solid #ffa000;
+    position: absolute;
+    bottom: -2px;
+    background-color: #ffa000;
+    color:white;
+    font-weight: 400;
+    width:100px;
+  }
+
+  #infobox .content-snippet .bridge-line #bridge-rewards .reward-block {
+    padding:0 0.5rem;
+    display: inline-block;
+  }
+
+  #infobox .content-snippet .bridge-line #bridge-rewards img {
+    height:20px; 
+    display:inline-block;
+  }
 
   /*-------- Bridge design --------*/
 
@@ -442,7 +475,7 @@ div #see-the-code {
     width:100%;
     white-space: normal;
     word-wrap: break-word;
-    border-radius: 20px;
+    border-radius: 0 20px 20px 20px;
     border:2px solid #ffa000;
     padding: 1rem 0.5rem;
   }
@@ -450,7 +483,6 @@ div #see-the-code {
   #infobox #biography .inside-popup-content {
     width:100%;
     white-space: normal;
-    border-radius: 20px;
   }
 
   #infobox .inside-popup-content .popup-description {
@@ -458,7 +490,20 @@ div #see-the-code {
     font-weight: 400;
   }
 
+/*---- Social block -----*/
 
+#infobox #social-block .social-action {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+}
+
+#infobox #social-block .social-icon {
+  display: inline-block;
+}
+
+#infobox #social-block .social-text {
+  display: inline-block;
+}
 
 /*------------ Preferences ------------*/
 
