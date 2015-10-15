@@ -1,3 +1,4 @@
+/*global d3*/
 var dndTree = (function() {
     'use strict';
 
@@ -7,7 +8,10 @@ var dndTree = (function() {
     var i = 0;
     var duration = 750;
     var root;
+
+    //This var messes up with the interface sizing
     var rightPaneWidth = 350;
+    var navbarHeight = 54;
 
     //History Vars
     var exploredArtistIds = [];
@@ -17,8 +21,8 @@ var dndTree = (function() {
     var clipPathId = 0;
 
     // size of the diagram
-    var viewerWidth = $(window).width() - rightPaneWidth;
-    var viewerHeight = $(window).height();
+    var viewerWidth = window.innerWidth - rightPaneWidth;
+    var viewerHeight = window.innerHeight - navbarHeight;
 
 
     //d3 objects
@@ -46,7 +50,13 @@ var dndTree = (function() {
         .attr("class", "overlay")
         .call(zoomListener);
 
-    function updateWindow(){
+    function updateWindow() {
+        var pixelWide = $('#rightpane').css('width');
+        var pixelHeight = $('#navbarup').css('height');
+
+        rightPaneWidth = parseInt(
+            pixelWide.substr(0, pixelWide.length - 2));
+        navbarHeight = parseInt(pixelHeight.substr(0, pixelHeight.length -2));
         viewerWidth = $(window).width() - rightPaneWidth;
         viewerHeight = $(window).height();
         baseSvg.attr("width", viewerWidth).attr("height", viewerHeight);
@@ -60,25 +70,34 @@ var dndTree = (function() {
     function centerNode(source) {
         lastExpandedNode = source;
         var scale = zoomListener.scale();
+        //WATCH OUT EVERYTHING WAS BADLY DONE OBJECTS
+        //HAVE INVERTED X AND Y
         var x = -source.y0;
         var y = -source.x0;
 
+        var nodeHeightOffset = 32;
 
-        x = x * scale + viewerWidth / 4;
-        y = y * scale + viewerHeight / 2.7;
-        // debugger;
 
+        // x = x * scale + viewerWidth / 4;
+        // y = y * scale + viewerHeight / 2.7;
+        
         //to center it:
         //var x = -source.y0;
         // var y = -source.x0;
-        // x = x * scale + viewerWidth / 2;
-        // y = y * scale + viewerHeight / 2;
+        x = x * scale;
+        y = (y + viewerHeight / (2 * scale) - nodeHeightOffset) * scale;
 
-        d3.select('#tree-container g').transition()
-            .duration(duration)
-            .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        //weird stuff to make everything translate and not only the zoom
+        // d3.select("#tree-container g").transition()
+        //     .duration(duration)
+        //     .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        //make the zoom transition to the new place
+
         zoomListener.scale(scale);
         zoomListener.translate([x, y]);
+        zoomListener.event(
+            d3.select("#tree-container g").transition().duration(500)
+        );
     }
     //This is called when we click on an artist and its update the model of the tree
     function setChildrenAndUpdateForArtist(node) {
@@ -91,12 +110,10 @@ var dndTree = (function() {
 
             artists.forEach(function(artist) {
 
-                node.children.push(
-                    {
-                        'artist': artist,
-                        'children': null
-                    }
-                )
+                node.children.push({
+                    'artist': artist,
+                    'children': null
+                })
                 exploredArtistIds.push(artist.id);
 
             });
@@ -113,12 +130,10 @@ var dndTree = (function() {
             }
 
             artists.forEach(function(artist) {
-                node.children.push(
-                    {
-                        'artist': artist,
-                        'children': null
-                    }
-                )
+                node.children.push({
+                    'artist': artist,
+                    'children': null
+                })
                 exploredArtistIds.push(artist.id);
             });
             update(node);
@@ -129,15 +144,15 @@ var dndTree = (function() {
     function initWithArtist(artist) {
         exploredArtistIds.push(artist.id);
         return {
-            'artist' : artist,
+            'artist': artist,
             'children': null,
         }
     };
 
     function initWithGenre(genreName) {
         return {
-            'genre' : {
-                'name':genreName
+            'genre': {
+                'name': genreName
             },
             'children': null,
         }
@@ -163,8 +178,8 @@ var dndTree = (function() {
                 return data.artist.id === highlightedPathAndNodeId;
             })
             .select("circle")
-                .style("stroke", "black")
-                .style("stroke-width", "2px");
+            .style("stroke", "black")
+            .style("stroke-width", "2px");
 
         //puts the new one
         svgGroup.select("#pathId" + d.artist.id)
@@ -175,8 +190,8 @@ var dndTree = (function() {
                 return data.artist.id === d.artist.id;
             })
             .select("circle")
-                .style("stroke", "orange")
-                .style("stroke-width", "6px");
+            .style("stroke", "orange")
+            .style("stroke-width", "6px");
 
         highlightedPathAndNodeId = d.artist.id;
     }
@@ -216,6 +231,7 @@ var dndTree = (function() {
         }
         return d;
     }
+
     function loadIframe(d) {
         AE.showIframe(d.artist);
     }
@@ -223,7 +239,6 @@ var dndTree = (function() {
     //event on clicking a node
     function click(d) {
         loadIframe(d);
-        debugger;
         d = toggleChildren(d);
         highlightPathAndNode(d);
     }
@@ -281,12 +296,12 @@ var dndTree = (function() {
         // Set widths between levels
         // This is the left to right thing
         nodes.forEach(function(n) {
-             n.y = (n.depth * 220);
+            n.y = (n.depth * 220);
         });
         // Update the nodes…
         var node = svgGroup.selectAll("g.node")
-        //!!!! Bind the nodes data from tree object, based on id
-        // to the SVG stuff
+            //!!!! Bind the nodes data from tree object, based on id
+            // to the SVG stuff
             .data(nodes, function(d) {
                 // console.log(d.id);
                 return d.id || (d.id = ++i);
@@ -322,60 +337,60 @@ var dndTree = (function() {
                 return d._children ? "black" : "#fff";
             });
 
-            //ClipPath Stuff, unique id for each
-            //this is to make the image round
+        //ClipPath Stuff, unique id for each
+        //this is to make the image round
         clipPathId++;
 
         nodeEnter.append("clipPath")
             .attr("id", "clipCircle" + clipPathId)
-                .append("circle")
-                .attr("r", 32);
+            .append("circle")
+            .attr("r", 32);
 
 
         nodeEnter.append("image")
             .attr("xlink:href", function(d) {
                 if (isArtist(d)) {
-                  return AE.getSuitableImage(d.artist.images);
+                    return AE.getSuitableImage(d.artist.images);
                 } else {
-                  return 'img/spotify.jpeg';
+                    return 'img/spotify.jpeg';
                 }
             })
             .attr("x", "-32px")
             .attr("y", "-32px")
             .attr("clip-path", "url(#clipCircle" + clipPathId + ")")
             .attr("width",
-              function(d) {
-                  if (isArtist(d)) {
-                      var image = d.artist.images[1];
-                      if (!image) {
+                function(d) {
+                    if (isArtist(d)) {
+                        var image = d.artist.images[1];
+                        if (!image) {
+                            return 64;
+                        }
+                        if (image.width > image.height) {
+                            return 64 * (image.width / image.height)
+                        } else {
+                            return 64;
+                        }
+                    } else {
                         return 64;
-                      }
-                      if (image.width > image.height) {
-                          return 64 * (image.width / image.height)
-                      } else {
-                          return 64;
-                      }
-                  } else {
-                    return 64;
-                  }
-              })
+                    }
+                })
             .attr("height",
-              function(d) {
-                  if (isArtist(d)) {
+                function(d) {
+                    if (isArtist(d)) {
 
-                      var image = d.artist.images[1];
-                      if (!image) {
+                        var image = d.artist.images[1];
+                        if (!image) {
+                            return 64;
+                        }
+                        if (image.height > image.width) {
+                            return 64 * (image.height / image.width)
+                        } else {
+                            return 64;
+                        }
+                    } else {
                         return 64;
-                      }
-                      if (image.height > image.width) {
-                          return 64 * (image.height/image.width)
-                      } else {
-                          return 64;
-                      }
-                  } else {
-                    return 64;
-                  }
-              })
+                    }
+                })
 
         nodeEnter.append("text")
             .attr("x", function(d) {
@@ -389,7 +404,7 @@ var dndTree = (function() {
             .text(function(d) {
                 if (isArtist(d)) {
                     return d.artist.name;
-                } else if (isGenre(d)){
+                } else if (isGenre(d)) {
                     return "Genre:" + AE.toTitleCase(d.genre.name);
                 }
 
@@ -529,7 +544,7 @@ var dndTree = (function() {
 
     }
 
-    function getAllArtists (node, artistIds) {
+    function getAllArtists(node, artistIds) {
         if (isArtist(node)) {
             artistIds.push(node.artist.id);
         }
@@ -543,9 +558,11 @@ var dndTree = (function() {
 
     return {
         "highlightPathAndNode": function(artist) {
-            highlightPathAndNode({artist: artist});
+            highlightPathAndNode({
+                artist: artist
+            });
         },
-         "setRoot" : function(artist) {
+        "setRoot": function(artist) {
             exploredArtistIds = []
             root = initWithArtist(artist);
             root.x0 = viewerHeight / 2;
@@ -558,7 +575,7 @@ var dndTree = (function() {
         "getExploredArtistsIds": function() {
             return exploredArtistIds;
         },
-        "setRootGenre" : function(genreName) {
+        "setRootGenre": function(genreName) {
             exploredArtistIds = []
             root = initWithGenre(genreName);
             root.x0 = viewerHeight / 2;
@@ -582,11 +599,11 @@ var dndTree = (function() {
             centerNode(root);
         },
 
-        "resizeOverlay" : function() {
+        "resizeOverlay": function() {
             updateWindow();
         },
 
-        "getAllArtists" : function() {
+        "getAllArtists": function() {
             var artistIds = [];
             getAllArtists(root, artistIds);
             //Return no more than 50 artists and make sure root is always there
@@ -600,8 +617,17 @@ var dndTree = (function() {
 
             }
             return artistIds;
+        },
+        "getZoom": function() {
+            return zoomListener;
+        },
+        "getViewerSize": function() {
+            return [viewerWidth, viewerHeight];
+        },
+        "getTree": function() {
+            return tree;
         }
-    }
+
+    };
 
 })();
-

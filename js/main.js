@@ -98,6 +98,7 @@
     function initRootWithArtist(artist) {
         dndTree.setRoot(artist);
         $('#genre-search').val('');
+        dndTree.resizeOverlay();
     }
 
     function initRootWithGenre(genre) {
@@ -150,7 +151,6 @@
             var genreName = search.value.trim();
             initRootWithGenre(genreName);
         }, false);
-
     }, false);
 
 
