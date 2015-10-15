@@ -12,6 +12,14 @@
   </head>
   <body>
     <div class="main-container">
+      <div id="nodes-history">
+          <h4>history</h4>
+          <ul data-bind="foreach: nodesHistory">
+            <li>
+              <p data-bind="text: artist.content.title, click: $parent.goBackToContent"></p>
+            </li>
+          </ul>
+      </div>
       <div id="rightpane">
         <div data-bind="visible: !isArtistInfoVisible()" id="hoverwarning">
           <h4>Help</h4>
