@@ -182,19 +182,19 @@
 
         if(content.previousContent) {
             contentInfoModel.previousContent(
-            content.previousContent);
+                content.previousContent);
             contentInfoModel.previousContentImageUrl(
-            content.previousContentImageUrl);
+                content.previousContentImageUrl);
         }
 
         if(content.bridge) {
-            contentInfoModel.bridgeExists(true)
+            contentInfoModel
+                .bridgeExists(true)
                 .bridge(content.bridge);
             if (content.bridgeAuthor) {
-                contentInfoModel.bridgeAuthor(
-                    content.bridgeAuthor)
-                .bridgeAuthorAvatar(
-                    content.authorAvatar);
+                contentInfoModel
+                    .bridgeAuthor(content.bridgeAuthor)
+                    .bridgeAuthorAvatar(content.authorAvatar);
             }
         } else {
             contentInfoModel.bridgeExists(false);
@@ -244,7 +244,7 @@
     // artistName and other observables
     // playTrack (methods bounds to other parts)
     // swithToGenre
-    var contentInfoModel = function() {
+    var ContentInfoModel = function() {
         var self = this;
 
         //old naming
@@ -273,8 +273,9 @@
         //     initRootWithGenre(this.name);
         // };
     };
-    var contentInfoModel = new contentInfoModel();
-    ko.applyBindings(contentInfoModel, document.getElementById("rightpane"));
+    var contentInfoModel = new ContentInfoModel();
+    ko.applyBindings(contentInfoModel,
+        document.getElementById("rightpane"));
 
     //gets the next Contents from the first one
     //with a promise on getArtistRelatedArtists (artistId)
@@ -477,6 +478,27 @@
     var iframeModel = new IframeModel();
     ko.applyBindings(iframeModel, document.getElementById("iframeModal"));
 
+    function refreshHistory() {
+        nodesHistoryModel.nodesHistory(dndTree.getHistory());
+    }
+
+    var NodesHistoryModel = function() {
+        var self = this;
+        self.nodesHistory = ko.observableArray([]);
+
+        self.goBackToContent = function(node) {
+            var index = 0;
+            self.nodesHistory().forEach(function(arnode, idx){
+                if (arnode.artist.id === node.artist.id) {
+                    index = idx;
+                }
+            });
+            dndTree.goBackToContent(index);
+        }
+    };
+    var nodesHistoryModel = new NodesHistoryModel();
+    ko.applyBindings(nodesHistoryModel,
+        document.getElementById("nodes-history"));
 
     //Login UI Model for KO, accessToken and localStorage for ae_userid, ae_display_name ae_user_image etc...
 
@@ -498,6 +520,7 @@
         toTitleCase: toTitleCase,
         contentInfoModel: contentInfoModel,
         showIframe: showIframe,
+        refreshHistory: refreshHistory,
         isZoomable: isZoomable
     };
 })();

@@ -16,6 +16,7 @@ var dndTree = (function() {
     //History Vars
     var exploredArtistIds = [];
     var lastExpandedNode;
+    var nodesExpandedHistory = [];
 
     // avoid clippath issue by assigning each image its own clippath
     var clipPathId = 0;
@@ -194,6 +195,18 @@ var dndTree = (function() {
         highlightedPathAndNodeId = d.artist.id;
     }
 
+    function pushNodeInHistory(d) {
+        nodesExpandedHistory.push(d);
+        AE.refreshHistory();
+    }
+
+    function popNodeFromHistory(id) {
+        var selectedNode = nodesExpandedHistory[id];
+        nodesExpandedHistory.splice(id + 1,
+            nodesExpandedHistory.length);
+        return selectedNode;
+    }
+
     //recursive function to remove children ids from explored
     function removeExpandedId(d) {
         if (d.children) {
@@ -239,6 +252,7 @@ var dndTree = (function() {
         loadIframe(d);
         d = toggleChildren(d);
         highlightPathAndNode(d);
+        pushNodeInHistory(d);
     }
     //Calculates all the stuff related to nodes placement
     //And node insertion + their hover
@@ -621,9 +635,16 @@ var dndTree = (function() {
         },
         "getViewerSize": function() {
             return [viewerWidth, viewerHeight];
-        },
+        }, 
         "getTree": function() {
             return tree;
+        },
+        "getHistory": function() {
+            return nodesExpandedHistory;
+        },
+        "goBackToContent": function(nodePlaceInHistory) {
+            centerNode(popNodeFromHistory(nodePlaceInHistory));
+            AE.refreshHistory();
         }
 
     };
