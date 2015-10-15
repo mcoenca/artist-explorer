@@ -37,7 +37,9 @@ var dndTree = (function() {
     // Define the zoom function for the zoomable tree
 
     function zoom() {
-        svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        if (AE.isZoomable()) {
+            svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        }
     }
 
     // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
@@ -77,27 +79,23 @@ var dndTree = (function() {
 
         var nodeHeightOffset = 32;
 
-
-        // x = x * scale + viewerWidth / 4;
-        // y = y * scale + viewerHeight / 2.7;
-        
         //to center it:
-        //var x = -source.y0;
-        // var y = -source.x0;
         x = x * scale;
         y = (y + viewerHeight / (2 * scale) - nodeHeightOffset) * scale;
 
-        //weird stuff to make everything translate and not only the zoom
-        // d3.select("#tree-container g").transition()
-        //     .duration(duration)
-        //     .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
-        //make the zoom transition to the new place
-
         zoomListener.scale(scale);
         zoomListener.translate([x, y]);
-        zoomListener.event(
-            d3.select("#tree-container g").transition().duration(500)
-        );
+
+        //Make everything translate
+        if (!AE.isZoomable()) {
+            d3.select("#tree-container g").transition()
+                .duration(duration)
+                .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+            } else {//make the zoom transition to the new place
+                zoomListener.event(
+                    d3.select("#tree-container g").transition().duration(500)
+                );
+            }
     }
     //This is called when we click on an artist and its update the model of the tree
     function setChildrenAndUpdateForArtist(node) {

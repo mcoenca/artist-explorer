@@ -11,23 +11,6 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1631513343747536&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <script>
-     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-     ga('create', 'UA-56769808-1', 'auto');
-     ga('send', 'pageview'); </script>
-
     <div class="main-container">
       <div id="rightpane">
         <div data-bind="visible: !isArtistInfoVisible()" id="hoverwarning">
@@ -51,6 +34,11 @@
 
         </div>
 
+        <div class="author-info">
+          <div class="author-img-container">
+            <img class="author-img" data-bind="attr:{src:bridgeAuthorAvatar}">
+          </div>
+        </div>
 
         <!-- Artist Info -->
         <div data-bind="visible: isArtistInfoVisible" id="infobox">
@@ -84,24 +72,43 @@
           </div>
 
           <div class="content-snippet start">
-            <a target="_blank" class="content-title" href="https://www.youtube.com/watch?v=Bh3m3_Mlcik"> Underground Resistance </a>
+            <a target="_blank" data-bind="text: previousContent().title, attr: { href:previousContent().url }" class="content-title" ></a>
             <div class="content-img-container">
-              <img class="content-img"src="http://davealex.com/wp-content/uploads/2012/05/UR-Punisher.jpg">
+              <img class="content-img" data-bind="attr: { src:previousContentImageUrl }">
             </div>
             <div class="bridge-line">
             </div>
           </div>
 
-          <div data-bind="visible: bioExists" id="bigoraphyDiv">
+          <div data-bind="visible: bridgeExists" id="bigoraphyDiv">
 <!--             <h4 id ="biography-label">Bridge</h4> -->
-            <div data-bind="html: biography" id="biography"> 
+
+<!--             <div data-bind="html: biography" id="biography">
+
+            </div> -->
+            <div id="biographyy">
+              <div class="inside-popup-content" style="background-color:white; font-weight:500;">
+                <div class="head-band">
+                  <div class="popup-image-container">
+                    <img data-bind="attr:{src:bridgeAuthorAvatar}">
+                  </div>
+                  <span class="popup-name" data-bind="text: bridgeAuthor().username"></span> says: <span class="popup-icon"><i class=icon-bridge></i></span>
+                </div>
+                <div class="popup-description" data-bind="text: bridge().description">
+                </div>
+                <div class="social-icons">
+                  <span><i class="icon-diamond"></i></span>
+                  <span data-bind="text:bridge().diamants">&nbsp;</span>
+                  <span>&nbsp;&nbsp;<i class="icon-heart"></i></span>
+                  <span data-bind="text:bridge().pouces">&nbsp;</span></div></div>
             </div>
+
           </div>
 
           <div class="content-snippet end">
             <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" class="content-title" id="artistName"> </a>
             <div class="content-img-container">
-              <img class="content-img"src="https://files.list.co.uk/images/2013/01/15/jeff-mills-web-image-2.jpg">
+              <img class="content-img" data-bind="attr: { src:image }">
             </div>
             <div class="bridge-line">
             </div>
@@ -180,6 +187,13 @@
               <input type="checkbox" id="repeatArtists" onclick="AE.setRepeatArtists()">
             </div>
           </div>
+
+          <div id="is-zoomable-container">
+            Make the scene zoomable
+            <div id="checkbox-div">
+              <input type="checkbox" id="isZoomable">
+            </div>
+          </div>
         </div>
 
       </div>
@@ -252,7 +266,7 @@
           <div class="modal-content">
             <div class="modal-header">
 <!--               <img style="max-width=200px;" data-bind="attr:{src: authorAvatar}"> -->
-              <button id="closeIframe" type="button" class="btn btn-sm" data-dismiss="modal">Close X <!-- <span data-bind="text: bridgeAuthor"></span> -->
+              <button id="closeIframe" type="button" class="btn btn-sm" data-dismiss="modal">Close X <!-- <span data-bind="text: authorUsername"></span> -->
               </button>
               <div id="iframe-container" data-bind="html: iframeHTML">
               </div>
@@ -341,8 +355,6 @@
       </div>
 
   </body>
-  <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['gauge']}]}"></script>
-  <script src="./bower_components/spotify-web-api-js/src/spotify-web-api.js"></script>
   <script src="./bower_components/knockout/dist/knockout.js"></script>
   <script src="./js/lib/jquery-1.10.2.min.js"></script>
   <script src="./js/lib/jquery-ui-1.11.1.min.js"></script>
