@@ -187,6 +187,19 @@
             content.previousContentImageUrl);
         }
 
+        if(content.bridge) {
+            contentInfoModel.bridgeExists(true)
+                .bridge(content.bridge);
+            if (content.bridgeAuthor) {
+                contentInfoModel.bridgeAuthor(
+                    content.bridgeAuthor)
+                .bridgeAuthorAvatar(
+                    content.authorAvatar);
+            }
+        } else {
+            contentInfoModel.bridgeExists(false);
+        }
+
         $.ajax({
             url: loadArtistInfoUri + content.uri
         }).done(function (data) {
@@ -249,6 +262,11 @@
         self.image = ko.observable();
         self.previousContent = ko.observable({});
         self.previousContentImageUrl = ko.observable("");
+
+        self.bridgeExists = ko.observable(false);
+        self.bridge = ko.observable({});
+        self.bridgeAuthor = ko.observable({});
+        self.bridgeAuthorAvatar = ko.observable("");
 
 
         // self.switchToGenre = function() {

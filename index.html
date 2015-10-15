@@ -50,10 +50,29 @@
             </div>
           </div>
 
-          <div data-bind="visible: bioExists" id="bigoraphyDiv">
+          <div data-bind="visible: bridgeExists" id="bigoraphyDiv">
 <!--             <h4 id ="biography-label">Bridge</h4> -->
-            <div data-bind="html: biography" id="biography"> 
+
+<!--             <div data-bind="html: biography" id="biography">
+
+            </div> -->
+            <div id="biographyy">
+              <div class="inside-popup-content" style="background-color:white; font-weight:500;">
+                <div class="head-band">
+                  <div class="popup-image-container">
+                    <img data-bind="attr:{src:bridgeAuthorAvatar}">
+                  </div>
+                  <span class="popup-name" data-bind="text: bridgeAuthor().username"></span> says: <span class="popup-icon"><i class=icon-bridge></i></span>
+                </div>
+                <div class="popup-description" data-bind="text: bridge().description">
+                </div>
+                <div class="social-icons">
+                  <span><i class="icon-diamond"></i></span>
+                  <span data-bind="text:bridge().diamants">&nbsp;</span>
+                  <span>&nbsp;&nbsp;<i class="icon-heart"></i></span>
+                  <span data-bind="text:bridge().pouces">&nbsp;</span></div></div>
             </div>
+
           </div>
 
           <div class="content-snippet end">
@@ -120,7 +139,7 @@
           </div>
 
           <div id="is-zoomable-container">
-            Make the scene zoomable or not
+            Make the scene zoomable
             <div id="checkbox-div">
               <input type="checkbox" id="isZoomable">
             </div>
