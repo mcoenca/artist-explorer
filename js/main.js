@@ -43,6 +43,13 @@
         }
     }
 
+    function isZoomable() {
+        if (document.getElementById("isZoomable").checked) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     //String modif utilities
     //whatdahell seems to be fetching something the url
     //must be related to weird ways of sharing this
@@ -458,5 +465,6 @@
         toTitleCase: toTitleCase,
         contentInfoModel: contentInfoModel,
         showIframe: showIframe,
+        isZoomable: isZoomable
     };
 })();
