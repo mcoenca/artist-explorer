@@ -42,9 +42,9 @@
         <!-- Artist Info -->
         <div data-bind="visible: isArtistInfoVisible" id="infobox">
           <div class="content-snippet start">
-            <a target="_blank" class="content-title" href="https://www.youtube.com/watch?v=Bh3m3_Mlcik"> Underground Resistance </a>
+            <a target="_blank" data-bind="text: previousContent().title, attr: { href:previousContent().url }" class="content-title" ></a>
             <div class="content-img-container">
-              <img class="content-img"src="http://davealex.com/wp-content/uploads/2012/05/UR-Punisher.jpg">
+              <img class="content-img" data-bind="attr: { src:previousContentImageUrl }">
             </div>
             <div class="bridge-line">
             </div>
@@ -59,7 +59,7 @@
           <div class="content-snippet end">
             <a target="_blank" data-bind="text: artistName, attr: { href:spotifyLink }" class="content-title" id="artistName"> </a>
             <div class="content-img-container">
-              <img class="content-img"src="https://files.list.co.uk/images/2013/01/15/jeff-mills-web-image-2.jpg">
+              <img class="content-img" data-bind="attr: { src:image }">
             </div>
             <div class="bridge-line">
             </div>

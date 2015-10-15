@@ -172,15 +172,23 @@
     //calls the api artistInfoUri to get bio and bioExists
     //genres
     //artist top tracks and plays the first one
-    function _getInfo(artist) {
+    function _getInfo(content) {
         $("#hoverwarning").css("display", "none");
 
         contentInfoModel.isArtistInfoVisible(true);
-        contentInfoModel.artistName(artist.name);
-        contentInfoModel.spotifyLink(artist.external_urls.spotify);
+        contentInfoModel.artistName(content.name);
+        contentInfoModel.spotifyLink(content.external_urls.spotify);
+        contentInfoModel.image(getSuitableImage(content.images));
+
+        if(content.previousContent) {
+            contentInfoModel.previousContent(
+            content.previousContent);
+            contentInfoModel.previousContentImageUrl(
+            content.previousContentImageUrl);
+        }
 
         $.ajax({
-            url: loadArtistInfoUri + artist.uri
+            url: loadArtistInfoUri + content.uri
         }).done(function (data) {
             var bioFound = false;
             if (data.artist.biographies) {
@@ -193,16 +201,16 @@
             }
             contentInfoModel.bioExists(bioFound);
 
-            dndTree.highlightPathAndNode(artist);
+            dndTree.highlightPathAndNode(content);
 
             contentInfoModel.genres([]);
             data.artist.genres.forEach(function (genre) {
                 contentInfoModel.genres.push(
                     {
                         "name": genre.name,
-                        "titleCaseName": toTitleCase(genre.name),
+                        "titleCaseName": toTitleCase(genre.name)
                     }
-                )
+                );
             });
         });
     }
@@ -226,18 +234,26 @@
     var contentInfoModel = function() {
         var self = this;
 
+        //old naming
         self.artistName = ko.observable();
         self.isArtistInfoVisible = ko.observable(false);
         self.spotifyLink = ko.observable();
-        self.popularity = ko.observable();
+        // self.popularity = ko.observable();
+        // old stuff
         self.biography = ko.observable();
         self.bioExists = ko.observable();
+        //not working
         self.genres = ko.observableArray([]);
-        self.topTracks = ko.observableArray([]);
 
-        self.switchToGenre = function() {
-            initRootWithGenre(this.name);
-        };
+        //new things
+        self.image = ko.observable();
+        self.previousContent = ko.observable({});
+        self.previousContentImageUrl = ko.observable("");
+
+
+        // self.switchToGenre = function() {
+        //     initRootWithGenre(this.name);
+        // };
     };
     var contentInfoModel = new contentInfoModel();
     ko.applyBindings(contentInfoModel, document.getElementById("rightpane"));
@@ -270,26 +286,26 @@
     //Gets from a genreName an array of artists
     //goes to en first with genre name to retrieve spotify ids (???)
     //and then goes to spotify
-    function getArtistsForGenre(genreName) {
-        return new Promise(function (resolve, reject) {
-            return $.ajax({
-                url: getGenreArtistsUri(encodeURIComponent(genreName.toLowerCase()))
-            }).then(function (data) {
-                var idsToRequest = [];
-                data.artists.forEach(function (artist) {
-                    if (artist.foreign_ids) {
-                        idsToRequest.push(getIdFromArtistUri(artist.foreign_ids[0].foreign_id));
-                    }
-                });
-                return currentApi.getArtists(idsToRequest).then(function (data) {
-                    //Sort in popularity order
-                    resolve(data.artists.sort(function (a, b) {
-                        return b.popularity - a.popularity;
-                    }).slice(0, numberOfContentsToShow));
-                });
-            });
-        });
-    }
+    // function getArtistsForGenre(genreName) {
+    //     return new Promise(function (resolve, reject) {
+    //         return $.ajax({
+    //             url: getGenreArtistsUri(encodeURIComponent(genreName.toLowerCase()))
+    //         }).then(function (data) {
+    //             var idsToRequest = [];
+    //             data.artists.forEach(function (artist) {
+    //                 if (artist.foreign_ids) {
+    //                     idsToRequest.push(getIdFromArtistUri(artist.foreign_ids[0].foreign_id));
+    //                 }
+    //             });
+    //             return currentApi.getArtists(idsToRequest).then(function (data) {
+    //                 //Sort in popularity order
+    //                 resolve(data.artists.sort(function (a, b) {
+    //                     return b.popularity - a.popularity;
+    //                 }).slice(0, numberOfContentsToShow));
+    //             });
+    //         });
+    //     });
+    // }
 
     function changeNumberOfContents(value) {
         numberOfContentsToShow = value;
@@ -457,7 +473,6 @@
     window.AE = {
         getSuitableImage: getSuitableImage,
         getRelated: getRelated,
-        getArtistsForGenre: getArtistsForGenre,
         getInfoCancel: getInfoCancel,
         getInfo: getInfo,
         changeNumberOfArtists: changeNumberOfContents,
