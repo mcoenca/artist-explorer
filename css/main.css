@@ -297,28 +297,50 @@ div #see-the-code {
   top:0;
   left:0;
   border-bottom: 2px solid #3F51B5;
-  overflow: hidden;
-  overflow-x:scrollbar;
+  overflow: scroll;
+  white-space: nowrap;
 }
 
 #nodes-history #nodes-list {
   height:100%;
   text-align: right;
+  padding: 5px 0;
 }
 
 #nodes-history #nodes-list .node {
   display: inline-block;
-  width: 30px;
-  height:30px;
-  margin: 5px;
+  width: 50px;
+  height: 50px;
+  margin: 0 1rem;
+  background-color: black;
+  border-radius: 50%;
+  border:2px solid #ffa000;
+  position: relative;
+}
+
+#nodes-history #nodes-list .node:last-child {
+  display: none;
+}
+
+#nodes-history #nodes-list .node:nth-last-child(2) .horizontal-line { 
+  display: none;
+}
+
+#nodes-history #nodes-list .node .horizontal-line{
+  position: absolute;
+  border-top:2px solid #ffa000;
+  top:23px;
+  left:48px;
+  width:50px;
 }
 
 #nodes-history #nodes-list .node img {
   width:100%;
   min-height: 100%;
+
 }
 
-#nodes-history #orange-line {
+#orange-line {
   position: fixed;
   left:0;
   top: 36px;
@@ -338,10 +360,10 @@ div #see-the-code {
 }
 
 #infobox .author-info .author-img-container {
-  width: 7vw;
-  height: 7vw;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 5px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -364,8 +386,9 @@ div #see-the-code {
   color:#1A237E;
 }
 
-#infobox .author-text-block .author-desc {
+#infobox .author-desc {
   font-style: italic;
+  padding-top: 0.5rem;
 }
 
 /*------------ Bridge card --------------*/
@@ -492,9 +515,13 @@ div #see-the-code {
 
 /*---- Social block -----*/
 
+#infobox #social-block {
+  text-align: center;
+}
+
 #infobox #social-block .social-action {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 3rem;
 }
 
 #infobox #social-block .social-icon {
@@ -563,10 +590,30 @@ div #see-the-code {
   padding: 0;
   border-bottom: 0;
 }
+#iframeModal .modal-dialog .modal-header button {
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+}
+
+#iframeModal .modal-dialog .modal-header button:hover {
+  background-color: grey;
+}
 
 #iframeModal #iframe-container {
   width:100%;
   height:100%;
+}
+
+#iframeModal #iframe-container a {
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding:1.5rem;
+  border-radius: 5px;
+  color:white;
+  background-color: #ffa000;
+  position: absolute;
+  top:20vh;
+  left:20vh;
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.3);
 }
 
 #iframeModal #content-iframe {

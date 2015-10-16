@@ -15,14 +15,16 @@
       <!-- History -->
       <div id="nodes-history">
         <div id="nodes-list" data-bind="foreach: nodesHistory">
-          >
           <div class="node">
-            <img style="height:20px; width:20px" data-bind="attr: { src:image }, click: $parent.goBackToContent">
+            <img data-bind="attr: { src:image }, click: $parent.goBackToContent">
+            <div class="horizontal-line"></div>
+
           </div>
         </div>
-<!--         <p data-bind="text: artist.content.title, click: $parent.goBackToContent"></p> -->
-        <div id="orange-line"></div>
       </div>
+<!--         <p data-bind="text: artist.content.title, click: $parent.goBackToContent"></p> -->
+      <div id="orange-line"></div>
+      
       <div id="rightpane">
         <div data-bind="visible: !isArtistInfoVisible()" id="hoverwarning">
           <h4>Help</h4>
@@ -108,10 +110,9 @@
                 <div class="author-name-container">
                   <div class="author-name" data-bind="text: bridgeAuthor().username"></div>
                 </div>
-                <div class="author-desc-container">
-                  <div class="author-desc"> Michelangelo took a big block of marble. He carved a lot of things out. I'm what's left.</div>
-
-                </div>
+              </div>
+              <div class="author-desc-container">
+                <div class="author-desc"> Michelangelo took a big block of marble. He carved a lot of things out. I'm what's left.</div>
               </div>
             </div>
 
