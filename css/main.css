@@ -15,6 +15,17 @@ h4 {
   background-color: #3F51B5;
 }
 
+#navbarup {
+  position: fixed;
+  left: 0;
+  width: 100%;
+}
+
+#navbarup .container{
+  margin:0;
+  width:100%;
+}
+
 .navbar-title {
   border-left: 2px solid #FFA000;
 }
@@ -48,7 +59,7 @@ h4 {
 }
 
 .overlay{
-  background-color:#FFFFFF;
+  background-color:#F6F6F6;
 }
 
 /* autocomplete */
@@ -131,7 +142,7 @@ h4 {
   float: left;
   top: 60px;
   left:0px;
-  width: 35vw;
+  width: 50vw;
   height: calc(100vh - 60px) !important;
   position: relative;
   padding: 5px;
@@ -292,46 +303,50 @@ div #see-the-code {
 
 #nodes-history {
   position: fixed;
-  height: 60px;
-  width:35vw;
-  top:0;
-  left:0;
-  border-bottom: 2px solid #3F51B5;
-  overflow: scroll;
-  white-space: nowrap;
+  top: 60px;
+  left: 1rem;
+  width: 68px;
+  z-index: 10;  
+
+  height: calc(50vh - 60px - 67px);
+  
+}
+
+#nodes-history #nodes-list-wrapper {
+  height: calc(50vh - 60px - 67px);
+  display:table-cell; 
+  vertical-align:bottom;
 }
 
 #nodes-history #nodes-list {
-  height:100%;
-  text-align: right;
-  padding: 5px 0;
+  max-height:100%;
+  overflow: auto;
 }
 
 #nodes-history #nodes-list .node {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  margin: 0 1rem;
+  width: 68px;
+  height: 68px;
   background-color: black;
   border-radius: 50%;
   border:2px solid #ffa000;
   position: relative;
+  margin-bottom:30px;
 }
 
 #nodes-history #nodes-list .node:last-child {
   display: none;
 }
 
-#nodes-history #nodes-list .node:nth-last-child(2) .horizontal-line { 
+/*#nodes-history #nodes-list .node:nth-last-child(2) .horizontal-line { 
   display: none;
-}
+}*/
 
 #nodes-history #nodes-list .node .horizontal-line{
   position: absolute;
-  border-top:2px solid #ffa000;
-  top:23px;
-  left:48px;
-  width:50px;
+  border-right:2px solid #ffa000;
+  top: 66px;
+  left: 31px;
+  height: 30px;
 }
 
 #nodes-history #nodes-list .node img {
@@ -340,30 +355,34 @@ div #see-the-code {
 
 }
 
-#orange-line {
+/*#orange-line {
   position: fixed;
-  left:0;
+  left:calc(25px + 1rem);
   top: 36px;
-  border-right:2px solid #FFA000;
-  width: calc(35vw - 25px - 1rem + 1px);
+  border-left:2px solid #FFA000;
   height:50px;
-}
+}*/
 
 /*------------ Author info --------------*/
 
 #infobox .author-info {
-  margin-top: 1rem;
+  position: absolute;
+  top: calc(-50px + 0.5rem);
   padding: 0.5rem;
-  width:100%;
-  background-color: #E8EAF6;
-
+  width: 100%;
+  height: 50px;
+  background-color: #E8EAF6;  
+  overflow: hidden;
+  border:2px solid #FFA000;
+  border-bottom: 0;
+  border-radius: 20px 0 0 0;
 }
 
 #infobox .author-info .author-img-container {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 15px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -394,61 +413,71 @@ div #see-the-code {
 /*------------ Bridge card --------------*/
 
 #infobox .bridge-card {
-  margin: 1rem 0;
+  margin-left: calc(68px + 1rem);
+  width: calc(50vw - 102px - 2rem);
+  margin-top: calc(50vh - 60px - 1rem + 1px - 34px - 25px);
 /*  box-shadow: 0px 1px 10px rgba(0,0,0,0.2);*/
 }
 
 /*------------ Bridge ---------------*/
 
 #infobox .bridge-container {
-  padding: 0.5rem;
+  padding: 0;
+  margin:0 0.5rem;
+  position: relative;
 }
 
 
   /*---- Start and Destination snippets*/
 
   #infobox .content-snippet{
-    position: relative;
-    height: 70px;
+    position: fixed;
+    bottom: calc(50vh - 1px);
+    width: 68px;
+    height: 68px;
+  }
+
+  #infobox .content-snippet.start {
+    left: 1rem;
+  }
+
+  #infobox .content-snippet.end {
+    left: calc(50vw - 34px);
   }
 
   #infobox .content-snippet .content-img-container {
     position: absolute;
-    width:50px;
-    height:50px;
+    width:68px;
+    height:68px;
     border-radius: 50%;
     border:2px solid #FFA000;
     overflow: hidden;
   }
-
+/*
   #infobox .content-snippet .content-title {
     position: absolute;
     width: 100%;
-    line-height: 50px;
+    line-height: 64px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
   #infobox .content-snippet.start .content-title {
-    padding-left: calc(50px + 0.5rem);
+    padding-left: calc(64px + 0.5rem);
     text-align: left;
   }
 
   #infobox .content-snippet.end .content-title {
-    top:20px;
-    padding-right: calc(50px + 0.5rem);
+    padding-right: calc(64px + 0.5rem);
     text-align: right;
-  }
+  }*/
 
 
   #infobox .start .content-img-container{
-    right:0;
   }
 
   #infobox .end .content-img-container{
-    top:20px;
-    right:0;
   }
 
   #infobox .content-img-container .content-img {
@@ -456,37 +485,41 @@ div #see-the-code {
   }
 
   #infobox .content-snippet .bridge-line {
-    width:calc(100% - 25px + 1px);
-    height:20px;
+    width:1rem;
+    border-top: 2px solid #ffa000;
     position: absolute;
+    top: 34px;
   }
 
   #infobox .content-snippet.start .bridge-line {
-    border-right: 2px solid #ffa000;
-    top:50px;
+    left:68px;
   }
 
   #infobox .content-snippet.end .bridge-line {
-    border-right: 2px solid #ffa000;
+    left:-1rem;
   }
 
-  #infobox .content-snippet .bridge-line #bridge-rewards{
+  /*----- Diamonds & Likes --------*/
+
+  #infobox #bridge-rewards {
+    position: absolute;
+    top: calc(0.5rem - 30px - 50px);
+    right:0;
+    height: 30px;
+    width:100px;
     border-radius: 4px 4px 0 0;
     border: 2px solid #ffa000;
-    position: absolute;
-    bottom: -2px;
     background-color: #ffa000;
     color:white;
     font-weight: 400;
-    width:100px;
   }
 
-  #infobox .content-snippet .bridge-line #bridge-rewards .reward-block {
+  #infobox #bridge-rewards .reward-block {
     padding:0 0.5rem;
     display: inline-block;
   }
 
-  #infobox .content-snippet .bridge-line #bridge-rewards img {
+  #infobox #bridge-rewards img {
     height:20px; 
     display:inline-block;
   }
@@ -498,9 +531,12 @@ div #see-the-code {
     width:100%;
     white-space: normal;
     word-wrap: break-word;
-    border-radius: 0 20px 20px 20px;
+    border-radius: 0 0 20px 20px;
     border:2px solid #ffa000;
+    border-top: 0;
     padding: 1rem 0.5rem;
+    position: relative;
+    z-index: 10;
   }
 
   #infobox #biography .inside-popup-content {
@@ -517,11 +553,18 @@ div #see-the-code {
 
 #infobox #social-block {
   text-align: center;
+  height: 60px;
+  position: relative;
+  top: -18px;
+  background-color: white;
+  z-index: 0;
+  border-radius: 0 0 5px 5px;
 }
 
 #infobox #social-block .social-action {
   display: inline-block;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 2rem;
+  margin-top:23px;
 }
 
 #infobox #social-block .social-icon {
@@ -540,7 +583,7 @@ div #see-the-code {
   position: fixed;
   left:0;
   bottom:0;
-  width: 35vw;
+  width: 330px;
   padding: 0.1rem 0.5rem;
 }
 
@@ -557,16 +600,15 @@ div #see-the-code {
 /*------------ IFrame styling --------------*/
 
 #iframeModal.modal {
-  width: 65vw;
-  left: 35vw;
+
 }
 
 #iframeModal .modal-dialog {
     position: fixed;
-    right: 0;
+    left:15vw;
     top: 0;
     height: calc(100vh - 60px);
-    width:65vw;
+    width:70vw;
     margin-top:60px;
 } 
 
@@ -582,7 +624,6 @@ div #see-the-code {
   -webkit-box-shadow: 0 0 0 0;
   border-radius: 0;
   border: 0px;
-  border-left:1px solid #3F51B5;
 }
 
 #iframeModal .modal-dialog .modal-header {
@@ -612,7 +653,7 @@ div #see-the-code {
   background-color: #ffa000;
   position: absolute;
   top:20vh;
-  left:20vh;
+  left:20vw;
   box-shadow: 1px 1px 10px rgba(0,0,0,0.3);
 }
 
@@ -622,6 +663,5 @@ div #see-the-code {
 }
 
 .modal-backdrop.in {
-    opacity: 0;
-    display: none;
+    opacity: 0.5;
 }
